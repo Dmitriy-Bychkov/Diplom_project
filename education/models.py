@@ -20,8 +20,8 @@ class Section(models.Model):
     class Meta:
         """ Представление написания заголовков в админке """
 
-        verbose_name = "раздел"
-        verbose_name_plural = "разделы"
+        verbose_name = 'раздел'
+        verbose_name_plural = 'разделы'
 
 
 class Material(models.Model):
@@ -42,5 +42,5 @@ class Material(models.Model):
     class Meta:
         """ Представление написания заголовков в админке """
 
-        verbose_name = "материал"
-        verbose_name_plural = "материалы"
+        verbose_name = 'материал'
+        verbose_name_plural = 'материалы'

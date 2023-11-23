@@ -18,7 +18,7 @@ class User(AbstractUser):
     REQUIRED_FIELDS = []
 
     def __str__(self):
-        return f"{self.email}"
+        return f'{self.first_name} - {self.email}'
 
     class Meta:
         """ Представление написания заголовков в админке """
