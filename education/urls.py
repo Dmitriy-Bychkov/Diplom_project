@@ -1,23 +1,21 @@
 from django.urls import path
-from django.views.decorators.cache import cache_page
-
 from education.apps import EducationConfig
-
+from education.views import IndexView, SectionListView, MaterialListView, MaterialDetailView
 
 app_name = EducationConfig.name
 
 urlpatterns = [
-    # path('', cache_page(60)(IndexView.as_view()), name='index'),
-    #
-    # path('clients/create_client/', ClientCreateView.as_view(), name='create_client'),
+    path('', IndexView.as_view(), name='index'),
+    path('sections/sections_list/', SectionListView.as_view(), name='sections_list'),
     # path('clients/clients_list/', ClientListView.as_view(), name='clients_list'),
     # path('clients/view_client/<int:pk>/', ClientDetailView.as_view(), name='view_client'),
     # path('clients/edit_client/<int:pk>/', ClientUpdateView.as_view(), name='edit_client'),
     # path('clients/delete_client/<int:pk>/', ClientDelete.as_view(), name='delete_client'),
     #
     # path('messages/create_message/', MessageCreateView.as_view(), name='create_message'),
-    # path('messages/messages_list/', MessageListView.as_view(), name='messages_list'),
-    # path('messages/view_message/<int:pk>/', MessageDetailView.as_view(), name='view_message'),
+    path('materials/materials_list/', MaterialListView.as_view(), name='materials_list'),
+    path('materials/materials_list/<int:section_id>/', MaterialListView.as_view(), name='materials_list_by_section'),
+    path('materials/view_material/<int:pk>/', MaterialDetailView.as_view(), name='view_material'),
     # path('messages/edit_message/<int:pk>/', MessageUpdateView.as_view(), name='edit_message'),
     # path('messages/delete_message/<int:pk>/', MessageDelete.as_view(), name='delete_message'),
     #
