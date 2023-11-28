@@ -1,6 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
 from education.models import NULLABLE
 
 
@@ -13,6 +12,7 @@ class User(AbstractUser):
     avatar = models.ImageField(upload_to='users/', default='no_image.jpg', verbose_name='аватар', **NULLABLE)
     phone = models.CharField(unique=True, max_length=20, verbose_name='телефон', **NULLABLE)
     country = models.CharField(max_length=50, verbose_name='страна', **NULLABLE)
+    is_student = models.BooleanField(default=True, verbose_name='студент')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
