@@ -1,0 +1,59 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<div>
+    <div class="row mt-2">
+        <div class="col m-2"><br>
+            {% if section %}
+            <h2 align="center">Материалы из раздела <u>{{ section.section_name }}</u></h2>
+            {% else %}
+            <h2 align="center">Все доступные материалы</h2>
+            {% endif %}
+            <br>
+            {% if material_list %}
+            <br>
+            <table class="table">
+                <thead>
+                <tr class="table-success">
+                    <th>№</th>
+                    <th>Материал</th>
+                    <th>Раздел</th>
+                    <th>Описание</th>
+                    <th>Ссылка на видео</th>
+                    <th>Преподаватель</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for material in material_list|dictsort:"section.section_name" %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'education:view_material' material.pk %}">{{ material.material_name }}</a></td>
+                    <td>{{ material.section }}</td>
+                    <td>{{ material.material_description|slice:":120" }}</td>
+                    {% if material.material_url %}
+                    <td><a href="{{ material.material_url }}">{{ material.material_url }}</a></td>
+                    {% else %}
+                    <td>{{ material.material_url|default:"-" }}</td>
+                    {% endif %}
+                    <td>{{ material.material_owner }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <p align="center">
+                        <a href="{% url 'education:sections_list' %}" class="button">Назад к списку разделов</a>
+                    </p>
+                </div>
+            </div>
+            <br><br>
+            {% else %}<br>
+            <p align="center">Нет добавленных материалов</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

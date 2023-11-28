@@ -1,0 +1,43 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 align="center">EPS - это мощный образовательный сервис с тестами, созданный для проверки твоих знаний и прокачки
+        навыков в отстающих областях</h2>
+    <div class="container-xxl bd-gutter mt-5">
+        <div class="col-md-12 mx-auto text-center">
+            <p class="lead mb-5">
+                Всего в пару кликов, выбери в навигации нужный раздел знаний и перейди к изучению выбранного материала
+                или протестируй себя. Наши кураторы и преподаватели всегда на связи для решения твоих вопросов.
+                {% if not user.is_authenticated %}
+                <br><br>Для дальнейшей работы необходима регистрация в нашем сервисе.
+                <br><br><b>Ты готов к обучению?</b>
+            </p>
+            <a class="p-2 btn btn-outline-primary" href="{% url 'users:login' %}">Войти или зарегистрироваться</a>
+            {% else %}
+            <h4>Приветствуем тебя, {{ user.first_name }}!<br>
+                Теперь тебе доступны все функции образовательной платформы.<br>
+                Начни обучение с выбора <a href="{% url 'education:sections_list' %}">раздела</a>.
+            </h4>
+            {% endif %}
+            <br><br><br>
+            <h5 align="left">Краткая статистика нашей платформы</h5>
+            <p align="left">
+                Образовательных разделов в сервисе: {{ total_sections }}<br>
+                Всего материалов загружено: {{ total_materials }}<br>
+                Количество наших студентов: {{ registered_students }}<br>
+            </p><br>
+            <h5 align="left">Самые популярные тесты</h5>
+            <ul>
+                {% for blog in random_blogs %}
+                <li>
+                    <a href="{% url 'blog:blog_view' blog.pk %}">{{ blog.title }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <br>
+</div>
+
+{% endblock %}
