@@ -12,6 +12,7 @@ class Section(models.Model):
                                         verbose_name='изображение раздела', **NULLABLE)
     section_description = models.TextField(verbose_name='описание раздела', **NULLABLE)
     section_owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                      limit_choices_to={'is_staff': True},
                                       verbose_name='владелец раздела', **NULLABLE)
 
     def __str__(self):
@@ -34,6 +35,7 @@ class Material(models.Model):
                                          verbose_name='изображение материала', **NULLABLE)
     material_url = models.URLField(verbose_name='ссылка на видео материала', **NULLABLE)
     material_owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE,
+                                       limit_choices_to={'is_staff': True},
                                        verbose_name='владелец материала', **NULLABLE)
 
     def __str__(self):
