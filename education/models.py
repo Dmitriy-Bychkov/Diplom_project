@@ -39,10 +39,11 @@ class Material(models.Model):
                                        verbose_name='владелец материала', **NULLABLE)
 
     def __str__(self):
-        return f'{self.material_name}, {self.material_description}, {self.material_preview}'
+        return f'{self.section} - {self.material_name}'
 
     class Meta:
         """ Представление написания заголовков в админке """
 
         verbose_name = 'материал'
         verbose_name_plural = 'материалы'
+        ordering = ['section__section_name']
