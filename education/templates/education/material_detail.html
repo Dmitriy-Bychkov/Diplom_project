@@ -31,7 +31,8 @@
 <div class="row mt-3">
     <div class="col-md-12">
         <p align="center">
-            <a href="{% url 'education:materials_list' %}" class="button">Назад к списку материалов</a>
+            <a href="{% url 'education:materials_list_by_section' section_id=material.section.id %}" class="button">Назад
+                к материалам раздела</a>
         </p>
     </div>
 </div><br><br>
