@@ -13,7 +13,7 @@ class QuestionAnswerInlineAdmin(admin.TabularInline):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    """ Представление ответов на тесты в админке """
+    """ Представление ответов на тесты в админке с инлайн связью с вопросами-ответами """
 
     list_display = ('text',)
     search_fields = ('text',)
@@ -22,16 +22,15 @@ class AnswerAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    """ Представление ответов на тесты в админке """
+    """ Представление ответов на тесты в админке с инлайн связью с вопросами-ответами """
 
     list_display = ('text',)
     search_fields = ('text',)
-
     inlines = [QuestionAnswerInlineAdmin]
 
 
 class ExamQuestionInlineAdmin(admin.TabularInline):
-    """ Представление ответов на тесты в админке """
+    """ Представление инлайн ответов на тесты в админке """
 
     fields = ('test', 'question')
     extra = 1
@@ -40,9 +39,8 @@ class ExamQuestionInlineAdmin(admin.TabularInline):
 
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
-    """ Представление ответов на тесты в админке """
+    """ Представление ответов на тесты в админке с инлайн связью с тестами-вопросами """
 
     list_display = ('name', 'material')
     search_fields = ('name',)
-
     inlines = [ExamQuestionInlineAdmin]
