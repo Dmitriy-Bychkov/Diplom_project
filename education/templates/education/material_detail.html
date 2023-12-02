@@ -28,6 +28,18 @@
 </p>
 {% endif %}
 <br><br>
+{% if material.exam_set.exists %}
+<div class="row mt-3">
+    <p style="margin-left: 30px;">Для данного материала предусмотрено тестирование!<br>После изучения материала переходи
+        к тесту для проверки и закрепления знаний.</p>
+    <div class="col-md-12">
+        <p align="center">
+            <a href="{% url 'exams:exam' exam_id=material.exam_set.first.id %}" class="btn btn-outline-danger">Перейти к тестированию</a>
+        </p>
+    </div>
+</div>
+{% endif %}
+<br><br>
 <div class="row mt-3">
     <div class="col-md-12">
         <p align="center">
