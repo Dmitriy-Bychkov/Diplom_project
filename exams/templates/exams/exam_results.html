@@ -1,0 +1,40 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<div style="margin-left: 50px;">
+    {% if passed %}
+        <h2 align="center" style="color: green;">Поздравляем, тест пройден!</h2>
+    {% else %}
+        <h2 align="center" style="color: red;">Тест провален.</h2>
+    {% endif %}
+
+    <br>
+    <p>Количество правильных ответов: {{ correct_answers }}</p>
+    <p>Количество неправильных ответов: {{ incorrect_answers }}</p>
+    <p>Общий процент правильных ответов: {{ percentage|floatformat:2 }}%</p>
+
+    {% if incorrect_answers_info and correct_answers %}
+        <h3>Неправильные ответы:</h3>
+        <ul>
+            {% for item in incorrect_answers_info %}
+                <li>
+                    Вопрос - {{ item.question.text }}<br>
+                    Неправильный ответ: <span style="color: red;">{{ item.selected_answers_text }}</span><br>
+                    Правильный ответ: <span style="color: green;">{{ item.correct_answer.text }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <br>
+
+    <div class="row mt-3">
+        <div class="col-md-12">
+            <p align="center">
+                <a href="{% url 'exams:exam' exam_id %}" class="button">Пройти тест сначала</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
