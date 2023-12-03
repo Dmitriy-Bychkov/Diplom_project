@@ -1,6 +1,7 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.views.generic import TemplateView, ListView, DetailView
 from education.models import Section, Material
+from exams.models import Exam
 from users.models import User
 
 
@@ -30,17 +31,9 @@ class IndexView(TemplateView):
         registered_students = User.objects.filter(is_staff=False).count()
         context['registered_students'] = registered_students
 
-        # Получение всех статей блога
-        # all_blogs = list(Blog.objects.all())
-        #
-        # if len(all_blogs) >= 3:
-        #     # Получение трёх случайных статей из блога
-        #     random_blogs = random.sample(all_blogs, 3)
-        # else:
-        #     # Если количество статей меньше 3, выводим все статьи
-        #     random_blogs = all_blogs
-        #
-        # context['random_blogs'] = random_blogs
+        # Получение количества всех загруженных тестов
+        total_exams = Exam.objects.count()
+        context['total_exams'] = total_exams
 
         return context
 
