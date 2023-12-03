@@ -1,0 +1,47 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<div>
+    <div class="row mt-2">
+        <div class="col m-2"><br>
+            <h2 align="center">Все доступные тесты</h2>
+            <br>
+            {% if exam_list %}
+            <br>
+            <table class="table">
+                <thead>
+                <tr class="table-success">
+                    <th>№</th>
+                    <th>Тест</th>
+                    <th>Материал</th>
+                    <th>Раздел</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for exam in exam_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td><a href="{% url 'exams:exam' exam.pk %}">{{ exam.name }}</a></td>
+                    <td><a href="{% url 'education:view_material' exam.material.pk %}">{{ exam.material }}</a></td>
+                    <td>{{ exam.material.section }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <p align="center">
+                        <a href="{% url 'education:sections_list' %}" class="button">Назад к разделам</a>
+                    </p>
+                </div>
+            </div>
+            <br><br>
+            {% else %}<br>
+            <p align="center">Нет добавленных тестов</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

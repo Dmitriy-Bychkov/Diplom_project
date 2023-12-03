@@ -1,5 +1,8 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import render, get_object_or_404
 from django.views import View
+from django.views.generic import ListView
+
 from exams.models import Exam
 from exams.services import calculate_exam_results
 
@@ -47,3 +50,9 @@ class ExamResultsView(View):
         context = calculate_exam_results(request, questions, exam_id)
 
         return render(request, 'exams/exam_results.html', context)
+
+
+class ExamListView(LoginRequiredMixin, ListView):
+    """ Контроллер для просмотра списка тестов для проверки знаний студентов """
+
+    model = Exam
