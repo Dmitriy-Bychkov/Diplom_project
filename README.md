@@ -1,4 +1,5 @@
-# Diploma project in the specialty "Python Developer"
+# OB1 - Diploma project in the specialty "Python Developer"
+--------------------------------------------------------------------
 # The self-learning platform with test-exams for authorized users.
 
 ## Task description
