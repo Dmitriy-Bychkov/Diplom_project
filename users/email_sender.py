@@ -13,7 +13,13 @@ def send_mail_task(subject, message, recipient_list):
     from_email = settings.EMAIL_HOST_USER
 
     try:
-        return send_mail(subject, message, from_email, recipient_list, fail_silently=False)
+        return send_mail(
+            subject,
+            message,
+            from_email,
+            recipient_list,
+            fail_silently=False
+        )
     except Exception as e:
         print(f'Ошибка отправки {e}')
         raise

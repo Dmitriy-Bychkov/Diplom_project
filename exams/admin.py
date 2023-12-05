@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from exams.models import Answer, QuestionAnswer, Question, ExamQuestion, Exam
 
 
@@ -13,7 +12,10 @@ class QuestionAnswerInlineAdmin(admin.TabularInline):
 
 @admin.register(Answer)
 class AnswerAdmin(admin.ModelAdmin):
-    """ Представление ответов на тесты в админке с инлайн связью с вопросами-ответами """
+    """
+    Представление ответов на тесты в админке
+    с инлайн связью с вопросами-ответами
+    """
 
     list_display = ('text',)
     search_fields = ('text',)
@@ -22,7 +24,10 @@ class AnswerAdmin(admin.ModelAdmin):
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
-    """ Представление ответов на тесты в админке с инлайн связью с вопросами-ответами """
+    """
+    Представление ответов на тесты в админке
+    с инлайн связью с вопросами-ответами
+    """
 
     list_display = ('text',)
     search_fields = ('text',)
@@ -39,7 +44,10 @@ class ExamQuestionInlineAdmin(admin.TabularInline):
 
 @admin.register(Exam)
 class ExamAdmin(admin.ModelAdmin):
-    """ Представление ответов на тесты в админке с инлайн связью с тестами-вопросами """
+    """
+    Представление ответов на тесты в админке
+    с инлайн связью с тестами-вопросами
+    """
 
     list_display = ('name', 'material')
     search_fields = ('name',)

@@ -1,6 +1,5 @@
 import os
 from dotenv import load_dotenv
-
 from config.settings import BASE_DIR
 from django.core.management import BaseCommand
 from users.models import User
