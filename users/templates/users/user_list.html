@@ -1,0 +1,43 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<div>
+    <div class="row mt-2">
+        <div class="col m-2"><br>
+            <h2 align="center">Наши преподаватели</h2>
+            <br>
+            {% if teacher_list %}
+            <br>
+            <table class="table">
+                <thead>
+                <tr class="table-active">
+                    <th>№</th>
+                    <th>Имя</th>
+                    <th>Фамилия</th>
+                    <th>Email</th>
+                    <th>Телефон</th>
+                    <th>Страна</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for teacher in teacher_list %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ teacher.first_name|default:"-" }}</td>
+                    <td>{{ teacher.last_name|default:"-" }}</td>
+                    <td>{{ teacher.email }}</td>
+                    <td>{{ teacher.phone|default:"-" }}</td>
+                    <td>{{ teacher.country|default:"-" }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+            <br>
+            {% else %}<br>
+            <p align="center">В сервисе еще никто не зарегистрирован!</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

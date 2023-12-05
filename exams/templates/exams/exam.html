@@ -1,0 +1,31 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<h2 align="center">{{ exam.material }}</h2>
+<h2 align="center">{{ exam.name }}</h2>
+<br>
+<div style="margin-left: 50px;">
+    <p>Выберите правильный вариант ответа из предложенных ниже.<br>
+        <strong><span style="color:green;">Для успешного прохождения теста, вам нужно ответить правильно не менее чем на 80% вопросов.
+        </span></strong>
+    </p><br>
+    <form method="POST" action="{% url 'exams:exam_results' exam.id %}">
+        {% csrf_token %}
+
+        {% for question in questions %}
+        <h3>Вопрос {{ forloop.counter }}</h3>
+        <p>{{ question.text }}</p>
+
+        {% for answer in question.answers.all %}
+        <input type="checkbox" id="answer_{{ answer.id }}" name="question_{{ question.id }}_answers"
+               value="{{ answer.id }}">
+        <label for="answer_{{ answer.id }}">{{ answer.text }}</label><br>
+        {% endfor %}
+        <br>
+        {% endfor %}
+        <br>
+        <button type="submit" class="btn btn-outline-primary">Проверить ответы</button>
+    </form>
+</div>
+
+{% endblock %}

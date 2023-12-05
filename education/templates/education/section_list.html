@@ -1,0 +1,42 @@
+{% extends 'education/base.html' %}
+{% block content %}
+
+<div>
+    <div class="row mt-2">
+        <div class="col m-2"><br>
+            <h2 align="center">Все образовательные разделы</h2>
+            <br>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                {% for section in section_list %}
+                <div class="col">
+                    <div class="card h-100">
+                        <div class="card-header">
+                            <h3 class="my-0 font-weight-normal">{{ section.section_name }}</h3>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="col-md-4 mb-3">
+                                {% load media_tags %}
+                                <img src="{% mediapath section.section_preview %}" class="img-fluid"
+                                     alt="{{ section.section_name }}">
+                            </div>
+                            <ul class="list-unstyled mt-3 mb-4 text-start m-3 flex-grow-1">
+                                <li>{{ section.section_description|slice:":140" }}</li>
+                            </ul>
+                            <h6 class="card-title pricing-card-title">Автор:
+                                {{ section.section_owner|default:"отсутствует" }}</h6>
+                            <br>
+                            <div class="d-flex flex-column">
+                                <a href="{% url 'education:materials_list_by_section' section.pk %}">К материалам раздела</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% empty %}
+                <p>Нет добавленных разделов</p>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
