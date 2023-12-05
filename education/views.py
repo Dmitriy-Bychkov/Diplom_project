@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.views.generic import TemplateView, ListView, DetailView
 from education.models import Section, Material
 from exams.models import Exam
@@ -60,7 +61,11 @@ class MaterialListView(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         section_id = self.kwargs.get('section_id')
         if section_id:
-            section = Section.objects.get(id=section_id)
+            try:
+                section = Section.objects.get(id=section_id)
+            except Section.DoesNotExist:
+                raise Http404()
+
             context['section'] = section
         return context
 
@@ -71,9 +76,12 @@ class MaterialListView(LoginRequiredMixin, ListView):
         """
 
         queryset = super().get_queryset()
-        section_id = self.kwargs.get('section_id')  # Получаем идентификатор раздела из URL
+
+        # Получаем идентификатор раздела из URL
+        section_id = self.kwargs.get('section_id')
         if section_id:
-            queryset = queryset.filter(section__id=section_id)  # Фильтруем материалы по идентификатору раздела
+            # Фильтруем материалы по идентификатору раздела
+            queryset = queryset.filter(section__id=section_id)
         return queryset
 
 
