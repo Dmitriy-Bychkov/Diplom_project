@@ -17,7 +17,7 @@
         <p>{{ question.text }}</p>
 
         {% for answer in question.answers.all %}
-        <input type="checkbox" id="answer_{{ answer.id }}" name="question_{{ question.id }}_answers"
+        <input type="radio" id="answer_{{ answer.id }}" name="question_{{ question.id }}_answers"
                value="{{ answer.id }}">
         <label for="answer_{{ answer.id }}">{{ answer.text }}</label><br>
         {% endfor %}
